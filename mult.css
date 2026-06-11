@@ -1,0 +1,223 @@
+/*
+File: mult.css
+GUI Assignment: Creating an Interactive Dynamic Table
+James Bord, UMass Lowell Computer Science, james_bord@student.uml.edu
+Copyright (c) 2021 by Bord. All rights reserved. May be freely copied or
+excerpted for educational purposes with credit to the author.
+updated by JB on June 8, 2026
+*/
+
+
+/* 
+Flex display on the body for the horizontal layout.
+The background is a light grey so the white elements pop off from it.
+Scrollbars are disabled.
+*/
+body {
+    display: flex;
+    background-color: #f0f0f0;
+    font-family: 'Courier New', Courier, monospace;
+    height: 96vh;
+    width: 96vw;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* 
+On the input area we have a vertical layout, width of 1/5 of
+the screen, height of the entire screen, a nice double blue line boarder, 
+and a white background. 
+ */
+fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border: 4px double #61AFEF;
+    background-color: white;
+    min-width: 0;
+    box-sizing: border-box;
+}
+form {
+    width: 21%;
+    height: 95%;
+    margin: auto;
+}
+
+
+/* 
+Rounded colored rectangle for the fieldset legend.
+Centered in the top border, takes up 75% of the width of the fieldset.
+*/
+legend {
+    margin: 0 auto;
+    background-color: #1f232a;
+    color: #4DA6FF;
+    padding: 5px;
+    border-radius: 10px;
+    width: 75%;
+    min-width: fit-content;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 0.15em;
+}
+
+/* Labels just need a margin so the inputs don't get crammed. */
+label {
+    margin-top: 10px;
+}
+
+/* 
+buttons.
+Need a margin on top to seperate from the block of inputs. Has a gradient 
+top and selectively shaded borders to give a 3d feel. Padding applied so it's
+always a wider rectangle.
+*/
+#submit {
+    margin-top: 30px;
+    background: linear-gradient(to bottom, #dfdfdf, #cccccc);
+    border-top: 3px solid #f0f0f0;
+    border-left: 3px solid #f0f0f0;
+    border-right: 3px solid darkgrey;
+    border-bottom: 3px solid darkgrey;
+
+    padding: 4px 12px;
+    font-family: Tahoma, sans-serif;
+    font-size: 11px;
+}
+
+
+/* 
+On press all border and gradient colors reverse
+to give the impression of indenting. 
+*/
+#submit:active {
+    background: linear-gradient(to bottom, #dcdcdc, #f4f4f4);
+    border-bottom: 3px solid #f0f0f0;
+    border-right: 3px solid #f0f0f0;
+    border-left: 3px solid darkgrey;
+    border-top: 3px solid darkgrey;
+}
+
+/*
+Red text centered in the empty space of the
+input fieldset for holding error messages. Usually empty.
+*/
+#error-container {
+    margin-top: auto;
+    margin-bottom: auto;
+    color: red;
+    text-align: center;
+}
+
+/*
+Scrolling container for the table. Takes up 3/4ths of the page.
+*/
+#table-container {
+    overflow: scroll;
+    width: 75%;
+    height: 95%;
+    margin: auto;
+}
+
+/*
+Table doesn't collapse borders as that looked wrong in scrolling,
+but does have effectively collapsed borders.
+*/
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/*
+Table headers are sticky so they always show even when scrolled. 
+Colored dark and padded, box shadow used to provide a border even when scrolling. 
+*/
+th {
+    position: sticky;
+    top: 0;
+    background-color: #1f232a;
+    color: #4DA6FF;
+    padding: 0.5em;
+    z-index: 1;
+    box-shadow: inset -1px -1px 0 0 #61AFEF;
+    font-size: small;
+}
+
+/*
+Box shadow for the scrolling border, small text, white background
+for generic table entries.
+*/
+td {
+    box-shadow: inset -1px -1px 0 0 black;
+    padding: 1em;
+    text-align: center;
+    background-color: white;
+    font-size: small;
+}
+
+/*
+First child of a row, the header, sticks to the left. 
+*/
+tr th:first-child {
+    left: 0;
+    top: auto;
+    z-index: 2;
+}
+
+/*
+The one top-left cell with the multiplication symbol is always visible in the top-left. 
+*/
+table tr:first-child th:first-child {
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+
+/* Overrides for phone screens. */
+@media (max-width: 600px) {
+    /* Single column layout on phones */
+    body {
+        flex-direction: column;
+    }
+    form {
+        width: 100%;
+        min-height: 45%;
+        max-height: fit-content;
+    }
+    label {
+        margin-top: 5px;
+    }
+    /* input is half the screen height */
+    fieldset {
+        width: auto;
+    }
+    /* table takes up the other half */
+    #table-container {
+        width: 100%;
+        max-height: 50%;
+        margin-top: 20px;
+    }
+    /* #submit is pushed up closer to the input to provide space for errors */
+    #submit {
+        margin-top: 10px;
+    }
+}
+
+/* Rule for JQuery validation error messages. */
+label.error {
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: smaller;
+    margin-top: 0px;
+}
+
+.slider {
+    margin-top: 5px;
+}
+
+input {
+    text-align: center;
+}
+
