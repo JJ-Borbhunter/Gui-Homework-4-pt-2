@@ -15,7 +15,7 @@ Scrollbars are disabled.
 */
 body {
     background-color: #f0f0f0;
-    height: 200vh;
+    height: fit-content;
     width: 100vh;
 }
 
@@ -24,7 +24,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     height: 96vh;
     width: 96vw;
-    margin: auto;
+    margin: 2vh;
     overflow: hidden;
 }
 
@@ -232,7 +232,7 @@ input {
 #tabs {
     width: 96vw;
     height: 96vh;
-    margin: auto;
+    margin: 2vh;
 }
 
 /* the tab bar + panels container */
@@ -253,14 +253,30 @@ input {
 }
 
 /* table inside tabs should not create its own scroll */
-.ui-tabs-panel #table-container {
-    width: 100%;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-}
 
 /* prevent extra spacing/jank */
 .ui-tabs-panel table {
     margin: 0;
+    padding: 1em;
+}
+
+.x-button {
+    border: none;
+    background: none;
+    padding: 2px;
+    margin: 0;
+    font-size: 0.75em;
+    cursor: pointer;
+    position: relative;
+    top: -4px;
+}
+
+.x-button:hover {
+    border: 1px dotted grey;
+}
+
+.ui-tabs .ui-tabs-nav li a {
+    height: fit-content;
+    padding: 0, 2em;
+    font-family: 'Courier New', Courier, monospace;
 }

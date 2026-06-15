@@ -235,27 +235,42 @@ $(document).ready(function() {
 let tab_count = 0;
 
 function add_tab() {
-    tab_count++;
+    const index = tab_count++;
 
-    const id = "tab-" + tab_count;
-    const title = "Table " + tab_count;
+    const id = "tab-" + index;
+    const title = "Table " + index;
 
-    // 1. Create real panel element
+    //Create real panel element
     const panel = document.createElement("div");
     panel.id = id;
     panel.className = "tabs-panel"
 
-    // 2. Put table HTML inside it
+    const li_id = "tab-link-" + index;
+    const but_id = "del-button-" + index;
+
+    //Put table HTML inside it
     panel.innerHTML = document.getElementById("table-container").innerHTML;
 
-    // 3. Add tab button
+    //Add tab button
     $("#tabs ul").append(
-        `<li><a href="#${id}">${title}</a></li>`
+        `<li id="${li_id}"><a href="#${id}">${title}</a>
+        <button class="x-button" id="${but_id}">x</button></li>`
     );
 
-    // 4. Add panel properly
+    //Add panel properly
     $("#tabs").append(panel);
 
-    // 5. Refresh jQuery UI
+    //Add a event handler to the button
+    $("#" + but_id).on("click", function() {
+        deleteTab(index);
+    });
+
+    //Refresh jQuery UI
+    $("#tabs").tabs("refresh");
+}
+
+function deleteTab(index) {
+    $("#tab-" + index).remove();
+    $("#tab-link-" + index).remove();
     $("#tabs").tabs("refresh");
 }
