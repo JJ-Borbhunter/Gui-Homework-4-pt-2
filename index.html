@@ -4,7 +4,7 @@ GUI Assignment: Creating an Interactive Dynamic Table
 James Bord, UMass Lowell Computer Science, james_bord@student.uml.edu
 Copyright (c) 2021 by Bord. All rights reserved. May be freely copied or
 excerpted for educational purposes with credit to the author.
-updated by JB on June 8, 2026
+updated by JB on June 15, 2026
 -->
 
 <!DOCTYPE html>
@@ -16,9 +16,13 @@ updated by JB on June 8, 2026
     <link href="mult.css" rel="stylesheet">
     <link href="jquery-ui.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loads of the Jquery library files -->
     <script src="jquery-4.0.0.js"></script>
     <script src="jquery.validate.js"></script>
     <script src="jquery-ui.js"></script>
+
+    <!-- load of the page's javascript -->
     <script src="mult.js" defer></script>
 </head>
 <body>
@@ -69,11 +73,14 @@ updated by JB on June 8, 2026
         </div>
     </div>
 
+    <!-- Page-size section to hold the tabbed interface -->
     <div id="tabs-section">
+        <!-- Explanatory note -->
         <p>
             Note:  Hold control/command and click to select multiple tabs, 
             and hit delete or backspace to delete.
         </p>
+        <!-- empty tab container for jquery -->
         <div id="tabs">
             <ul></ul>
         </div>

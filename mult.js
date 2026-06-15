@@ -4,9 +4,11 @@ GUI Assignment: Creating an Interactive Dynamic Table
 James Bord, UMass Lowell Computer Science, james_bord@student.uml.edu
 Copyright (c) 2021 by Bord. All rights reserved. May be freely copied or
 excerpted for educational purposes with credit to the author.
-updated by JB on June 8, 2026
+updated by JB on June 15, 2026
 */
 
+// Single access point to link both the slider to the input box
+// and vice versa, to avoid partial linking
 function two_way_link_slider_input(sliderId, inputId) {
 
     $(sliderId).slider({
@@ -240,44 +242,50 @@ $(document).ready(function() {
     });
 });
 
-
+// global only used in adding tabs
 let tab_count = 0;
 
+// copying of a table form the preview window to a tab
 function add_tab() {
+    // Capture of global tab count index as a unique identifier
     const index = ++tab_count;
 
+    // all ID's used for access (and the title) work off the unique index
     const id = "tab-" + index;
     const title = "Table " + index;
+    const li_id = "tab-link-" + index;
+    const but_id = "del-button-" + index;
 
     //Create real panel element
     const panel = document.createElement("div");
     panel.id = id;
     panel.className = "tabs-panel"
 
-    const li_id = "tab-link-" + index;
-    const but_id = "del-button-" + index;
-
     //Put table HTML inside it
     panel.innerHTML = document.getElementById("table-container").innerHTML;
 
-    //Add tab button
+    //Add tab button with it's close little x
     $("#tabs ul").append(
         `<li id="${li_id}"><a href="#${id}">${title}</a>
         <button class="x-button" id="${but_id}">x</button></li>`
     );
 
-    //Add panel properly
+    //Add panel to the tabs
     $("#tabs").append(panel);
 
-    //Add a event handler to the button
+    //Add a event handler to the delete button
     $("#" + but_id).on("click", function() {
         deleteTab(index);
     });
 
+    // add the selection handler to the tab selector
     $("#" + li_id + " a").on("click", function(e) {
         if (e.ctrlKey || e.metaKey) {
+            // these two lines needed to stop jquery from just 
+            // selecting the tab and moving on
             e.preventDefault();
             e.stopImmediatePropagation();
+
             toggleSelectTab(index);
         }
     });
@@ -286,13 +294,18 @@ function add_tab() {
     $("#tabs").tabs("refresh");
 }
 
+// Delete the tab and it's indicator by index then refresh
 function deleteTab(index) {
+    // Delete off of the unique indices
     $("#tab-" + index).remove();
     $("#tab-link-" + index).remove();
     $("#tabs").tabs("refresh");
 }
 
+// Gobal for storing the selected tabs
 let selected_tabs_index = new Set();
+
+// If selected unselect if unselected select, mimicking standard behavior
 function toggleSelectTab(index) {
     if(selected_tabs_index.has(index)) {
         unselectTab(index);
@@ -311,6 +324,8 @@ function selectTab(index) {
     selected_tabs_index.add(index);
 }
 
+// Iterate through the selected tabs set and delete each one, then empty the set
+// Called globally on the delete key
 function deleteAllSelectedTabs() {
     selected_tabs_index.forEach(index => {
         deleteTab(index);

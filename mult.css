@@ -4,21 +4,20 @@ GUI Assignment: Creating an Interactive Dynamic Table
 James Bord, UMass Lowell Computer Science, james_bord@student.uml.edu
 Copyright (c) 2021 by Bord. All rights reserved. May be freely copied or
 excerpted for educational purposes with credit to the author.
-updated by JB on June 8, 2026
+updated by JB on June 15, 2026
 */
 
 
-/* 
-Flex display on the body for the horizontal layout.
-The background is a light grey so the white elements pop off from it.
-Scrollbars are disabled.
-*/
+/* Background color and that's about it for the body */
 body {
     background-color: #f0f0f0;
     height: fit-content;
     width: 100vw;
 }
 
+/* 
+Flex display for horizontal layout on PC and vertical on mobile
+*/
 #body-section {
     display: flex;
     font-family: 'Courier New', Courier, monospace;
@@ -43,6 +42,8 @@ fieldset {
     min-width: 0;
     box-sizing: border-box;
 }
+
+/* ~1/4th of the horizontal screen is taken up by the form for table details */
 form {
     width: 21%;
     height: 95%;
@@ -219,27 +220,35 @@ label.error {
     margin-top: 0px;
 }
 
+/* sliders just need spacing between themselves and the inputs above */
 .slider {
     margin-top: 5px;
 }
 
+/* Default looks good so just align the text center */
 input {
     text-align: center;
 }
 
 
-
+/* 
+like body-section this is a container for everything in the tabbed-
+interface section of the page. It is also about an entire viewport in size
+so if you scroll down from the table maker you can view the tabs as the entire page
+*/
 #tabs-section {
     width: 96vw;
     height: 96vh;
     margin: 2vh auto;
 }
 
+/* take up all the width and all the height save for the tooltip paragraph */
 #tabs {
     width: auto;
-    height: auto;
+    height: 90vh;
 }
 
+/* Only used for the tooltip to let you know to hold cntrl/cmd for selection */
 p {
     margin: 1em auto 0.5em 2em;
     font-family: 'Courier New', Courier, monospace;
@@ -251,10 +260,10 @@ p {
     height: 100%;
 }
 
-/* ONLY scroll container */
+/* ONLY scroll container, need !important for jquery to respect my wishes */
 .ui-tabs-panel {
     width: 100%;
-    height: calc(96vh - 3.5em);
+    height: calc(100% - 3em);
     overflow: auto;
 
     padding: 0 !important;
@@ -262,14 +271,16 @@ p {
     position: relative;
 }
 
-/* table inside tabs should not create its own scroll */
-
 /* prevent extra spacing/jank */
 .ui-tabs-panel table {
     margin: 0;
     padding: 1em;
 }
 
+/* 
+class added to the little close buttons on tabs. they're just the letter 'x' 
+moved into the top right corner
+*/
 .x-button {
     border: none;
     background: none;
@@ -281,19 +292,24 @@ p {
     top: -4px;
 }
 
+/* 
+give a little border on hover along with the pointer cursor to indicate
+that this is interactable 
+*/
 .x-button:hover {
     border: 1px dotted grey;
 }
 
+
 .ui-tabs .ui-tabs-nav li a {
     height: fit-content;
-    padding: 0, 2em;
+    padding: 0, 2em !important;
     font-family: 'Courier New', Courier, monospace;
 }
 
 .selected-tab {
     background-color: lightblue !important;
     color: white !important;
-    border: 1px solid #61AFEF !important;
+    border: 1px solid inset #61AFEF !important;
 }
 
