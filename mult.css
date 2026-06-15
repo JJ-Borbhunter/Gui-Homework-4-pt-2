@@ -16,7 +16,7 @@ Scrollbars are disabled.
 body {
     background-color: #f0f0f0;
     height: fit-content;
-    width: 100vh;
+    width: 100vw;
 }
 
 #body-section {
@@ -24,7 +24,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     height: 96vh;
     width: 96vw;
-    margin: 2vh;
+    margin: 2vh auto;
     overflow: hidden;
 }
 
@@ -184,7 +184,7 @@ table tr:first-child th:first-child {
 /* Overrides for phone screens. */
 @media (max-width: 600px) {
     /* Single column layout on phones */
-    body {
+    #body-section {
         flex-direction: column;
     }
     form {
@@ -229,10 +229,20 @@ input {
 
 
 
-#tabs {
+#tabs-section {
     width: 96vw;
     height: 96vh;
-    margin: 2vh;
+    margin: 2vh auto;
+}
+
+#tabs {
+    width: auto;
+    height: auto;
+}
+
+p {
+    margin: 1em auto 0.5em 2em;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 /* the tab bar + panels container */
@@ -280,3 +290,10 @@ input {
     padding: 0, 2em;
     font-family: 'Courier New', Courier, monospace;
 }
+
+.selected-tab {
+    background-color: lightblue !important;
+    color: white !important;
+    border: 1px solid #61AFEF !important;
+}
+

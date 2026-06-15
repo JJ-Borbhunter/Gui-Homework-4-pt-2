@@ -188,6 +188,7 @@ $(document).ready(function() {
         }
     });
 
+    // dynamic rebuilder for input change on the sliders3
     $("#min-x, #max-x, #min-y, #max-y").on(
         "input change",
         function(form) {
@@ -229,13 +230,21 @@ $(document).ready(function() {
     );
 
     $("#tabs").tabs();
+
+    $(document).on("keydown", function(e) {
+        // Delete key (modern + legacy support just in case)
+        if (e.key === "Delete" || e.keyCode === 46 || 
+            e.key === "Backspace" || e.keyCode === 8) {
+            deleteAllSelectedTabs();
+        }
+    });
 });
 
 
 let tab_count = 0;
 
 function add_tab() {
-    const index = tab_count++;
+    const index = ++tab_count;
 
     const id = "tab-" + index;
     const title = "Table " + index;
@@ -265,6 +274,14 @@ function add_tab() {
         deleteTab(index);
     });
 
+    $("#" + li_id + " a").on("click", function(e) {
+        if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            toggleSelectTab(index);
+        }
+    });
+
     //Refresh jQuery UI
     $("#tabs").tabs("refresh");
 }
@@ -273,4 +290,30 @@ function deleteTab(index) {
     $("#tab-" + index).remove();
     $("#tab-link-" + index).remove();
     $("#tabs").tabs("refresh");
+}
+
+let selected_tabs_index = new Set();
+function toggleSelectTab(index) {
+    if(selected_tabs_index.has(index)) {
+        unselectTab(index);
+    } else {
+        selectTab(index);
+    }
+}
+
+function unselectTab(index) {
+    $("#tab-link-" + index).removeClass("selected-tab");
+    selected_tabs_index.delete(index);
+}
+
+function selectTab(index) {
+    $("#tab-link-" + index).addClass("selected-tab");
+    selected_tabs_index.add(index);
+}
+
+function deleteAllSelectedTabs() {
+    selected_tabs_index.forEach(index => {
+        deleteTab(index);
+    });
+    selected_tabs_index.clear();
 }
