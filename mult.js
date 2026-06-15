@@ -108,6 +108,14 @@ $(document).ready(function() {
         "Range cannot exceed 301 numbers."
     );
 
+    $.validator.addMethod(
+        "integer",
+        function(value, element, param) {
+            return !value.includes('.');
+        },
+        "Value must be an integer."
+    );
+
     // Establish rules for each field.
     $("#mult-form").validate({
 
@@ -118,25 +126,29 @@ $(document).ready(function() {
             min_x: {
                 required: true,
                 number: true,
-                lessThanOrEqual: "#max-x"
+                lessThanOrEqual: "#max-x",
+                integer: true
             },
 
             max_x: {
                 required: true,
                 number: true,
-                rangeSize: ["#min-x", "#max-x"]
+                rangeSize: ["#min-x", "#max-x"],
+                integer: true
             },
 
             min_y: {
                 required: true,
                 number: true,
-                lessThanOrEqual: "#max-y"
+                lessThanOrEqual: "#max-y",
+                integer: true
             },
 
             max_y: {
                 required: true,
                 number: true,
-                rangeSize: ["#min-y", "#max-y"]
+                rangeSize: ["#min-y", "#max-y"],
+                integer: true
             }
         },
 
@@ -170,7 +182,7 @@ $(document).ready(function() {
         // original submit onclick but made cleaner by jquery
         submitHandler: function(form) {
 
-
+            add_tab();
 
             return false;
         }
@@ -215,4 +227,35 @@ $(document).ready(function() {
         y_min,
         y_max
     );
+
+    $("#tabs").tabs();
 });
+
+
+let tab_count = 0;
+
+function add_tab() {
+    tab_count++;
+
+    const id = "tab-" + tab_count;
+    const title = "Table " + tab_count;
+
+    // 1. Create real panel element
+    const panel = document.createElement("div");
+    panel.id = id;
+    panel.className = "tabs-panel"
+
+    // 2. Put table HTML inside it
+    panel.innerHTML = document.getElementById("table-container").innerHTML;
+
+    // 3. Add tab button
+    $("#tabs ul").append(
+        `<li><a href="#${id}">${title}</a></li>`
+    );
+
+    // 4. Add panel properly
+    $("#tabs").append(panel);
+
+    // 5. Refresh jQuery UI
+    $("#tabs").tabs("refresh");
+}

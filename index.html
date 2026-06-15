@@ -22,49 +22,55 @@ updated by JB on June 8, 2026
     <script src="mult.js" defer></script>
 </head>
 <body>
-    <!-- Area for the submission of parameters -->
-    <form id="mult-form">
+    <div id="body-section">
+        <!-- Area for the submission of parameters -->
+        <form id="mult-form">
 
-    <!-- Fieldset for the in-line title -->
-    <fieldset>
-        <!-- area title bar -->
-        <legend>Parameters</legend>
+        <!-- Fieldset for the in-line title -->
+        <fieldset>
+            <!-- area title bar -->
+            <legend>Parameters</legend>
 
-        <!-- 
-        The inputs do not any longer need regex patterns or 
-        type specification as JQuery handles that in the JS.
-        -->
+            <!-- 
+            The inputs do not any longer need regex patterns or 
+            type specification as JQuery handles that in the JS.
+            -->
 
-        <!-- minimum row value input -->
-        <label for="min-x">Minimum row value:</label>
-        <input id="min-x" name="min_x" value="0">
-        <div class="slider" id="min-x-s"></div>
+            <!-- minimum row value input -->
+            <label for="min-x">Minimum row value:</label>
+            <input id="min-x" name="min_x" value="0">
+            <div class="slider" id="min-x-s"></div>
 
-        <!-- maximum row value input -->
-        <label for="max-x">Maximum row value:</label>
-        <input id="max-x" name="max_x" value="0">
-        <div class="slider" id="max-x-s"></div>
-
-
-        <!-- minimum column value input -->
-        <label for="min-y">Minimum column value:</label>
-        <input id="min-y" name="min_y" value="0">
-        <div class="slider" id="min-y-s"></div>
+            <!-- maximum row value input -->
+            <label for="max-x">Maximum row value:</label>
+            <input id="max-x" name="max_x" value="0">
+            <div class="slider" id="max-x-s"></div>
 
 
-        <!-- maximum column value input -->
-        <label for="max-y">Maximum column value:</label>
-        <input id="max-y" name="max_y" value="0">
-        <div class="slider" id="max-y-s"></div>
+            <!-- minimum column value input -->
+            <label for="min-y">Minimum column value:</label>
+            <input id="min-y" name="min_y" value="0">
+            <div class="slider" id="min-y-s"></div>
 
 
-        <!-- Submit button -->
-        <input type="submit" value="Submit" id="submit">
-    </fieldset>
-    </form>
+            <!-- maximum column value input -->
+            <label for="max-y">Maximum column value:</label>
+            <input id="max-y" name="max_y" value="0">
+            <div class="slider" id="max-y-s"></div>
 
-    <!-- empty div for holding the resulting table -->
-    <div id="table-container">
+
+            <!-- Submit button -->
+            <input type="submit" value="Submit" id="submit">
+        </fieldset>
+        </form>
+
+        <!-- empty div for holding the resulting table -->
+        <div id="table-container">
+        </div>
+    </div>
+
+    <div id="tabs">
+        <ul></ul>
     </div>
 </body>
 </html>

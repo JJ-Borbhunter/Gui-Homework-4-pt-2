@@ -14,8 +14,13 @@ The background is a light grey so the white elements pop off from it.
 Scrollbars are disabled.
 */
 body {
-    display: flex;
     background-color: #f0f0f0;
+    height: 200vh;
+    width: 100vh;
+}
+
+#body-section {
+    display: flex;
     font-family: 'Courier New', Courier, monospace;
     height: 96vh;
     width: 96vw;
@@ -126,8 +131,9 @@ Table doesn't collapse borders as that looked wrong in scrolling,
 but does have effectively collapsed borders.
 */
 table {
-    border-collapse: separate;
+    border-collapse: collapse;
     border-spacing: 0;
+    position: relative;
 }
 
 /*
@@ -221,3 +227,40 @@ input {
     text-align: center;
 }
 
+
+
+#tabs {
+    width: 96vw;
+    height: 96vh;
+    margin: auto;
+}
+
+/* the tab bar + panels container */
+.ui-tabs {
+    width: 100%;
+    height: 100%;
+}
+
+/* ONLY scroll container */
+.ui-tabs-panel {
+    width: 100%;
+    height: calc(96vh - 3.5em);
+    overflow: auto;
+
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative;
+}
+
+/* table inside tabs should not create its own scroll */
+.ui-tabs-panel #table-container {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+}
+
+/* prevent extra spacing/jank */
+.ui-tabs-panel table {
+    margin: 0;
+}
